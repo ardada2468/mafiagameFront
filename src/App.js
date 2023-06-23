@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <PlayerForm/>
+        {/* <PlayerForm/>
         <AdminView/>
-        <AllPlayer/>
+        <AllPlayer/> */}
       </header>
     </div>
   );

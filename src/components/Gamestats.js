@@ -18,7 +18,7 @@ export default function GameStats() {
         return (
             <div>
                 <h6>Game Status</h6>
-                <h7>Currently Voting: {data.toString()}</h7>
+                <h6>Currently Voting: {data.toString()}</h6>
             </div>
         );
     }

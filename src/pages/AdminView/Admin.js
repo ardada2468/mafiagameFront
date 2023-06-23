@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import useFetch from 'react-fetch-hook'
 import GameStats from '../../components/Gamestats';
+import { useNavigate } from "react-router-dom";
+
+import { json } from 'react-router-dom';
 // import "./allplayer.css"
 export default function AdminView() {
+    const navigate = useNavigate();
+
 
     function handledelete(id){
         // e.preventDefault();
@@ -22,12 +27,35 @@ export default function AdminView() {
 
     }
 
+    
+    function handleStartGame(){
+        // e.preventDefault();
+       
+        var requestOptions = {
+            method: 'PATCH',
+            redirect: 'follow'
+          };
+          
+          fetch("http://localhost:8080/votingAllowed", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        
+        window.location.reload(false);
+
+    }
+
+
+    
+
     const {isLoading, data, error } = useFetch('http://localhost:8080/allPlayers');
     // const {isLoadingVoting, isVotingAllowed, error2 } = useFetch('http://localhost:8080/votingAllowed');
     
     // let load = isLoading && isLoadingVoting;
 
-
+    // const jsonobj = JSON.parse(localStorage.getItem('player'))
+    // const id = jsonobj.id;
+    // console.log(id)
     if (isLoading){
         return(
             <div>
@@ -37,6 +65,11 @@ export default function AdminView() {
             </div>
         )
     }else{
+        const jsonobj = JSON.parse(localStorage.getItem('player'))
+        const id = jsonobj.id;
+        console.log(id)
+        if (id === 1){
+
         console.log(data)
 
   
@@ -70,8 +103,20 @@ export default function AdminView() {
                 ))}
                 </table>
                 <button onClick={() => window.location.reload(false)}>Click to reload!</button>
+                <button onClick={() => handleStartGame()}>Start Game</button>
+
             </div>
         );
+     }else{
+        console.log(JSON.parse(localStorage.getItem('player')).id === 0)
+        navigate("/")
+        return(
+
+            <div>
+                <h1>Not Authorized</h1>
+            </div>
+        )
     }
   }
+}
   

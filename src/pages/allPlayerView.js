@@ -27,13 +27,16 @@ export default function AllPlayer() {
                         <th>Votes</th>
                     </tr>
                 {data.map(player => (
-                    <tr>
+                    <tr draggable='false'>
                         <td>{player.name}</td>
                         <td>{player.votes}</td>
                     </tr>
                 ))}
                 </table>
                 <button onClick={() => window.location.reload(false)}>Click to reload!</button>
+                <a href='/newUser'>
+                    <button>Join!</button>
+                </a>
             </div>
         );
     }

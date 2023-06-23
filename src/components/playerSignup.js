@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function PlayerForm() {
+  const navigate = useNavigate();
+
     function handleSubmit(e) {
       // Prevent the browser from reloading the page
       e.preventDefault();
@@ -20,7 +24,14 @@ export default function PlayerForm() {
       // You can pass formData as a fetch body directly:
       
     console.log(localStorage.getItem("player"))
-    window.location.reload(false)
+    const jsonobj = JSON.parse(localStorage.getItem('player'))
+    const id = jsonobj.id;
+    console.log(id)
+    if(id === 1){
+      navigate('/admin')
+    }else{
+      navigate("/")
+    }
     }
   
     return (
@@ -28,6 +39,7 @@ export default function PlayerForm() {
             <label>
                  Enter Name: <input name="name"/>
             </label>
+
         <button type="submit">Submit form</button>
 
       </form>
